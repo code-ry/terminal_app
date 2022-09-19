@@ -1,4 +1,12 @@
+from sys import argv
+print(argv[2])
+
+def hello():
+    return 'hello'
+
 def main():
-    pass
+
+    print(hello())
+
 if __name__ == '__main__':
     main()
