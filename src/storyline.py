@@ -15,7 +15,7 @@ class StoryChoice:
         else:
             print("You Lose")
 
-class Character:
+class Player:
     hero_list = ['Warrior', 'Hunter', 'Mage']
 
     def customize(self):
@@ -57,14 +57,34 @@ class Character:
                 self.hp -= enemy.attack
                 print(f'{enemy.name} wins! you lose {enemy.attack}health.')
             else:
-                print("It's a Draw")
+                print('It\'s a Draw')
         if self.hp > 0:
             print('You are the winner!')
         else:
             print('You are the Loser!')
         
-        def puzzle(self):
-            
+    def puzzle(self):
+        riddles = [
+            'What has to be broken before you can use it?',
+            'I\'m tall when young yet short when I\'m old, What am I?',
+            'I\'m full of holes but still hold water?'
+            ]
+        clues = [
+            'Who first, me or the Chicken!',
+            'I show you the way in the dark!',
+            'My best friend is Patrick!'
+        ]
+        answers = ['Egg', 'Candle', 'Sponge']
+        attempts = 5
+        x = randint(0, 2)
+        while attempts > 0:
+            player_answer = input(riddles[x])
+            if player_answer in answers[x]:
+                print('You Win!')
+                break
+            attempts -= 1
+            if attempts < 3:
+                print(f'Ok I will give you a clue... {clues[x]}')
 
 class Monster:
     def __init__(self, name, hp, attack):
