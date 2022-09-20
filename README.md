@@ -4,6 +4,8 @@
 
 ## Repository
 
+https://github.com/code-ry/terminal_app
+
 ## Code Styling
 
 The Code styling conventions that this application will adhere to are the PEP 8 guidlines referenced below.
@@ -25,5 +27,7 @@ Throughout the game the user will encounter enemies that they must overcome to p
 Along the journey the User will come across a mysterious character. To get past this character the user must complete a puzzle. The mysterious character will choose a random 5 letter word from a selected list, then give the user a clue to what the word is. The user will have to guess the word in 5 tries or fail the test and suffer the consequences.
 
 ## Implementation Plan
+
+https://trello.com/invite/b/MsbMDOnQ/525ad056e87b76e646bbd8678684e49c/terminal-game
 
 ## Help Documentation
