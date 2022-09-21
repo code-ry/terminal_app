@@ -31,3 +31,39 @@ Along the journey the User will come across a mysterious character. To get past 
 https://trello.com/invite/b/MsbMDOnQ/525ad056e87b76e646bbd8678684e49c/terminal-game
 
 ## Help Documentation
+
+### Installation
+
+Download the files by cloning my repository using the command in terminal:
+git clone https://github.com/code-ry/terminal_app
+establish pwd to /src directory.
+install Python
+Run bash_script.sh by typing following command in terminal(This will set up a virtual environment and install any packages required for running app):
+./bash_script.sh
+
+ENJOY!
+
+### Dependencies
+
+Python3 installed with following packages:
+art==5.7
+attrs==22.1.0
+iniconfig==1.1.1
+packaging==21.3
+pluggy==1.0.0
+py==1.11.0
+pyparsing==3.0.9
+pytest==7.1.3
+tomli==2.0.1
+
+### System/Hardware requirements
+
+Windows/Linux/Mac OS
+30 MB Hard Drive space
+8 MB RAM
+
+### How to Use App
+
+When prompted a question, type into the terminal the desired answer and press enter.
+When asked yes or no type 'yes' or simply type 'y' then enter.
+To exit program type CTRL+C or when asked to play again type 'No'.
