@@ -1,18 +1,18 @@
 from random import randint
 import time
-# class Levels:
-#     def __init__(self, level1, level2):
+class Levels:
+    def __init__(self, level1, level2):
 
     
-#         self.levels = [level1, level2]
-#         self.level_selector = -1
+        self.levels = [level1, level2]
+        self.level_selector = -1
 
-#     def add_level(self, level):
-#         self.levels.append(level)
+    def add_level(self, level):
+        self.levels.append(level)
     
-#     def next_level(self):
-#         self.level_selector += 1
-#         return self.levels[self.level_selector]
+    def next_level(self):
+        self.level_selector += 1
+        return self.levels[self.level_selector]
 
 class StoryChoice:
     def __init__(self, question, answer, alt = 'Y'):
