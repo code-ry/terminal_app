@@ -1,48 +1,57 @@
 from random import randint
 
+class Levels:
+    
+
 class StoryChoice:
-    def __init__(self, question, answer):
+    def __init__(self, question, answer, alt = 'Y'):
         self.question = question
         self.answer = answer
-        self.progress = ''
+        self.progress = True
+        self.alt = alt
 
     def choice(self):
         print(f'{self.question}')
         answer = input()
-        if answer == self.answer:
+        if answer == self.answer or answer == self.alt:
             print('You Win')
-            self.progress = 'win'
+            self.progress = True
         else:
+            self.progress = False
             print("You Lose")
 
+
 class Player:
-    hero_list = ['Warrior', 'Hunter', 'Mage']
+    hero_list = ['a', 'b', 'c']
+    hero = ''
 
-    def customize(self):
-        self.name = input('What is your name?')
-        self.hero = input('Which hero would you like to play as? Warrior, Hunter or Mage...')
-
-        while self.hero not in self.hero_list:
-                print('Please choose from the list')
-                self.hero = input('Which hero would you like to play as? Warrior, Hunter or Mage...')
-
-        if self.hero == 'Warrior':
+    def set(self):
+        if self.hero == 'a':
+            self.name = 'Grimly The Fierce'
             self.hp = 100
             self.attack = 10
             self.weapon = 'Axe'
 
-        elif self.hero == 'Hunter':
+        elif self.hero == 'b':
+            self.name = 'Ethondril the Agile'
             self.hp = 60
             self.attack = 20
             self.weapon = 'Bow'
 
         else:
+            self.name = 'Ailwyn the Powerful'
             self.hp = 50
             self.attack = 40
             self.weapon = 'Frostbolt'
 
+    def hero_pick(self):
+
+        while self.hero not in self.hero_list:
+                
+                self.hero = input('Which hero would you like to play as?\n a. Grimly The Fierce a Warrior\n b. Ethondril the Agile an Archer\n c. Ailwyn the Powerful a Wizard\n')
+
     def __repr__(self):
-        return f'{self.name}, {self.hero}, {self.hp}, {self.attack}, {self.weapon}'
+        return f'{self.hero}, {self.hp}, {self.attack}, {self.weapon}'
 
     def battle(self, enemy):
         while self.hp > 0 and enemy.hp > 0:
