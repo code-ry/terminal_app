@@ -1,7 +1,18 @@
 from random import randint
+import time
+# class Levels:
+#     def __init__(self, level1, level2):
 
-class Levels:
     
+#         self.levels = [level1, level2]
+#         self.level_selector = -1
+
+#     def add_level(self, level):
+#         self.levels.append(level)
+    
+#     def next_level(self):
+#         self.level_selector += 1
+#         return self.levels[self.level_selector]
 
 class StoryChoice:
     def __init__(self, question, answer, alt = 'Y'):
@@ -14,35 +25,33 @@ class StoryChoice:
         print(f'{self.question}')
         answer = input()
         if answer == self.answer or answer == self.alt:
-            print('You Win')
             self.progress = True
         else:
             self.progress = False
-            print("You Lose")
-
 
 class Player:
     hero_list = ['a', 'b', 'c']
     hero = ''
+    items = {'Ring of health' : 20, 'Ring of Attack' : 40}
 
     def set(self):
         if self.hero == 'a':
             self.name = 'Grimly The Fierce'
             self.hp = 100
             self.attack = 10
-            self.weapon = 'Axe'
+            self.weapon = 'swings their mighty Axe'
 
         elif self.hero == 'b':
             self.name = 'Ethondril the Agile'
             self.hp = 60
             self.attack = 20
-            self.weapon = 'Bow'
+            self.weapon = 'fires their Long-Bow'
 
         else:
             self.name = 'Ailwyn the Powerful'
             self.hp = 50
             self.attack = 40
-            self.weapon = 'Frostbolt'
+            self.weapon = 'launches a devestating Frostbolt'
 
     def hero_pick(self):
 
@@ -54,19 +63,36 @@ class Player:
         return f'{self.hero}, {self.hp}, {self.attack}, {self.weapon}'
 
     def battle(self, enemy):
+        input(f'You face off with the {enemy.name}.\n You must roll a higher number to attack. Press enter to roll!')
+        counter = 0
         while self.hp > 0 and enemy.hp > 0:
-            player_roll = randint(1,11)
+            # item_add = input('Would you like to use an item?')
+            # if item_add == 'Y':
+            #     which_item = input(f'Which item would you like to use?{self.items[')
+            #     self.attack += 20
+            # if item_add == 'Y':
+
+            if counter > 0:
+                input('Press enter to Roll again!')
+            counter += 1
+            time.sleep(1)
+            player_roll = randint(1,10)
             print(f'{self.name} rolls a {player_roll}')
-            enemy_roll = randint(1,11)
+            time.sleep(1)
+            enemy_roll = randint(1,10)
             print(f'{enemy.name} rolls a {enemy_roll}')
+            time.sleep(1)
             if player_roll > enemy_roll:
                 enemy.hp -= self.attack
-                print(f'You win! enemy loses {self.attack}health.')
+                print(f'{self.name} attacks and {self.weapon}.\n The {enemy.name} loses {self.attack} health with {enemy.hp} remaining.')
             elif enemy_roll > player_roll:
                 self.hp -= enemy.attack
-                print(f'{enemy.name} wins! you lose {enemy.attack}health.')
+                print(f'{enemy.name} attacks and {enemy.weapon}.\n {self.name} loses {enemy.attack} health with {self.hp} remaining.')
             else:
-                print('It\'s a Draw')
+                print('It\'s a Draw, roll again!')
+            time.sleep(1)
+            #     self.attack -= 20
+            #     item_add == 'N'
         if self.hp > 0:
             print('You are the winner!')
         else:
@@ -96,8 +122,9 @@ class Player:
                 print(f'Ok I will give you a clue... {clues[x]}')
 
 class Monster:
-    def __init__(self, name, hp, attack):
+    def __init__(self, name, hp, attack, weapon):
         self.name = name
         self.hp = hp
         self.attack = attack
+        self.weapon = weapon
 
