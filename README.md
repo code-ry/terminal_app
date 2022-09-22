@@ -14,9 +14,9 @@ https://peps.python.org/pep-0008/
 
 ## Features
 
-### Items and Attributes
+### RockPaperScissors
 
-At the start of the game, the user can choose from a range of characters to customize their play style. Each character will have different strengths and weakness represented by attridutes which will effect game-play. The user will be able to choose a limited amount of items to carry which will also adjust their characters attributes. Throughout the game a user will come across different items with which they can swap out with current ones in their inventory.
+
 
 ### Battle
 
@@ -66,5 +66,4 @@ Windows/Linux/Mac OS
 ### How to Use App
 
 When prompted a question, type into the terminal the desired answer and press enter.
-When asked yes or no type 'yes' or simply type 'y' then enter.
-To exit program type 'quit' at any time.
+To exit program type 'Quit' at any time.

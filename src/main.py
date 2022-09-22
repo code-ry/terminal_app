@@ -1,8 +1,10 @@
 import art
-import storyline as s
-from random import randint
 import time
+import storyline as s
 import numpy as np
+from random import randint
+
+
 
 welcome = s.StoryChoice('''Welcome to GemQuest, make your way through the unknown lands to find the treasure!\n
                            To quit at any time type 'Quit'\n Type 'Start' to begin... \n''', 'Start', 'Quit', '')
