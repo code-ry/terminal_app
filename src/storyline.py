@@ -38,7 +38,7 @@ class PlayAgain(StoryChoice):
     def choice(self):
         user_input = get_input(f'{self.question}')
         while user_input not in (self.path_one, self.path_two):
-            print(f"Please enter either {self.path_one} or {self.path_two} or 'quit'.a")
+            print(f'Please enter either {self.path_one} or {self.path_two} or \'quit\'.')
             user_input = get_input(f'{self.question}')
         if user_input == self.path_one:
             self.progress = True
@@ -84,7 +84,7 @@ class Player:
             self.weapon = 'launches a devestating Frostbolt'
 
     def hero_pick(self):
-        self.hero = get_input('Which hero would you like to play as?\n a. Grimly The Fierce a Warrior\n b. Ethondril the Agile an Archer\n c. Ailwyn the Powerful a Wizard\n')
+        self.hero = get_input('\nWhich hero would you like to play as?\n a. Grimly The Fierce Warrior\n b. Ethondril the Agile Archer\n c. Ailwyn the Powerful Wizard\n')
         while self.hero not in self.hero_list:
             self.hero = get_input('Please enter either a, b or c: ')          
 
@@ -92,41 +92,42 @@ class Player:
         return f'{self.hero}, {self.hp}, {self.attack}, {self.weapon}'
 
     def battle(self, enemy):
-        get_input(f'\nYou face off with the {enemy.name}.\n You must roll a higher number than {enemy.name} to attack. Press enter to roll!\n')
+        get_input(f'\nYou face off with the {enemy.name}.\nYou must roll a higher number than {enemy.name} to attack. Press enter to roll!\n')
         counter = 0
         enemy.hp = enemy.base_hp
         while self.hp > 0 and enemy.hp > 0:
             if counter > 0:
-                get_input('\nPress enter to Roll again!')
+                get_input('\nPress enter to Roll again!\n')
             counter += 1
             time.sleep(1)
             player_roll = randint(1,10)
             print(f'{self.name} rolls a {player_roll}')
             time.sleep(1)
             enemy_roll = randint(1,10)
-            print(f'{enemy.name} rolls a {enemy_roll}')
+            print(f'{enemy.name} rolls a {enemy_roll}\n')
             time.sleep(1)
             if player_roll > enemy_roll:
                 enemy.hp -= self.attack
                 print(f'{self.name} attacks and {self.weapon}.\n')
                 time.sleep(1)
-                print(f'{enemy.name} loses {self.attack} health with {enemy.hp} remaining.')
+                print(f'{enemy.name} loses {self.attack} health with {enemy.hp} health remaining.')
             elif enemy_roll > player_roll:
                 self.hp -= enemy.attack
                 print(f'{enemy.name} attacks and {enemy.weapon}.\n')
                 time.sleep(1)
-                print(f'{self.name} loses {enemy.attack} health with {self.hp} remaining.')
+                print(f'{self.name} loses {enemy.attack} health with {self.hp} health remaining.')
             else:
                 print('It\'s a Draw, roll again!')
             time.sleep(1)
         if self.hp > 0:
-            print(f'You defeat {enemy.name}!!!')
+            time.sleep(1)
+            print(f'\nYou defeat {enemy.name}!!!\n')
             time.sleep(2)
      
     def puzzle(self):
         riddles =[
             'What has to be broken before you can use it?\n',
-            'I\'m tall when young yet short when I\'m old, What am I?\n',
+            'I\'m tall when young, yet short when I\'m old, What am I?\n',
             'I\'m full of holes but still hold water?\n',
             'What has lots of eyes, but can\'t see?\n',
             'I am always hungry and will die if not fed, but whatever I touch will soon turn red. What am I?\n'
@@ -142,19 +143,20 @@ class Player:
         attempts = 0
         wins = 0
         i = randint(0, len(riddles) - 1)
+        print('O\'kay Here we go...\n')
         while attempts < 5 and wins < 3:
-            print(f'You have {5 - attempts} attempts left')
+            print(f'You be havin\' {5 - attempts} attempts left\n')
             time.sleep(1)
             player_answer = get_input(riddles[i])
             time.sleep(1)
             if attempts == 2:
-                print(f'Ok I will give you a clue... \n{clues[i]}')
+                print(f'Ok I will give you a clue... \n{clues[i]}\n')
                 time.sleep(1)
             if player_answer == answers[i]:
-                print(f'You be clever cookie!')
+                print(f'You be clever cookie!\n')
                 time.sleep(1)
                 wins += 1
-                attempts == 0
+                attempts = 0
                 riddles.pop(i)
                 clues.pop(i)
                 answers.pop(i)
@@ -164,9 +166,10 @@ class Player:
                 attempts += 1
         if wins == 3:
             self.master_of_riddles = True
-            print('You be wiser than I thought. Blessed e your travels!')
+            print('\nYou be wiser than I thought. Blessed be your travels!')
+            time.sleep(2)
         else: 
-            print(f"You not so bright aren't ya, da answer is {answers[i]}")
+            print(f'\nYou not so bright aren\'t ya, da answer is {answers[i]}')
             time.sleep(2)
 
 class Monster:
@@ -183,9 +186,9 @@ class RockPaperScissors:
         comp_wins = 0
         time.sleep(1)
         while player_wins != 3 and comp_wins != 3:
-            user_input = get_input('Lets play.. Rock, Paper or Scissors?: ')
+            user_input = get_input('\nLets play.. Rock, Paper or Scissors?: ')
             while user_input not in ('Rock', 'Paper', 'Scissors'):
-                print('Please enter either Rock, Paper or Scissors')
+                print('\nPlease enter either Rock, Paper or Scissors')
                 user_input = get_input('')
             random_int = randint(1,3)
             if random_int == 1:
@@ -195,34 +198,35 @@ class RockPaperScissors:
             else:
                 comp_choice = 'Scissors'
             time.sleep(1)
-            print(f'Ogre chooses {comp_choice}')
+            print(f'\nOgre chooses {comp_choice}')
             time.sleep(1)
             if user_input == comp_choice:
-                print('Its a tie, Go again!')
+                print('\nIts a tie, Go again!')
                 continue
             if user_input == 'Rock' and comp_choice == 'Paper':
                 player_wins += 1
-                print('You win this round!')
+                print('\nYou win this round!')
             if user_input == 'Rock' and comp_choice == 'Scissors':
                 comp_wins += 1
-                print('AHA I win this one!')
+                print('\nAHA I win this one!')
             if user_input == 'Scissors' and comp_choice == 'Paper':
                 player_wins += 1
-                print('You are better than I thought!')
+                print('\nYou are better than I thought!')
             if user_input == 'Scissors' and comp_choice == 'Rock':
                 comp_wins += 1
-                print('I am so smart.. S M R T...')
+                print('\nI am so smart.. S M R T...')
             if user_input == 'Paper' and comp_choice == 'Rock':
                 player_wins += 1
-                print('You must be cheating!')
+                print('\nYou must be cheating!')
             if user_input == 'Paper' and comp_choice == 'Scissors':
                 comp_wins += 1
             time.sleep(1)
-            print(f'Your wins: {player_wins}\nOgre wins: {comp_wins}')
+            print(f'\nYour wins: {player_wins}\nOgre wins: {comp_wins}')
         if player_wins == 3:
-            print('I don\'t know how but you beat me!')
+            time.sleep(1)
+            print('\nI don\'t know how but you beat me!')
             player.has_gem = True
         else:
-            print('Come back when you\'ve had some practice, NO gem for you!')
+            print('\nCome back when you\'ve had some practice, NO gem for you!')
 
         
