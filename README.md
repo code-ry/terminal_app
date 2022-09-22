@@ -67,4 +67,4 @@ Windows/Linux/Mac OS
 
 When prompted a question, type into the terminal the desired answer and press enter.
 When asked yes or no type 'yes' or simply type 'y' then enter.
-To exit program type CTRL+C or when asked to play again type 'No'.
+To exit program type 'quit' at any time.
