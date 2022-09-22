@@ -5,7 +5,7 @@ import time
 import numpy as np
 
 welcome = s.StoryChoice('''Welcome to GemQuest, make your way through the unknown lands to find the treasure!\n
-                           To quit at any time type 'quit'\n Type 'Start' to begin... \n''', 'Start', 'quit', '')
+                           To quit at any time type 'Quit'\n Type 'Start' to begin... \n''', 'Start', 'Quit', '')
 first_story = s.StoryLine('\nYou begin your quest by heading out of town into the forest.')
 first_story.add_line('Then you come across a cave with a Dragon.\n')
 level_one = s.StoryChoice("Do you attack the Dragon? Y or N: ", 'Y','N', 'The Dragon melts you with his firey breath! \n You die a toasty death!\n')
@@ -63,7 +63,7 @@ def main():
             play_again.choice()
     except KeyboardInterrupt:
         time.sleep(1)
-        print("Thanks for playing! GoodBye") 
+        print("\nThanks for playing! Good Bye") 
 
 if __name__ == '__main__':
     main()

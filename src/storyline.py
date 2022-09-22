@@ -3,9 +3,9 @@ import time
 import numpy as np
 
 def get_input(prompt):
-    input_value = input(prompt)
+    input_value = input(prompt).capitalize()
 
-    if input_value == "quit":
+    if input_value == "Quit":
         raise KeyboardInterrupt
     
     return input_value
@@ -58,33 +58,32 @@ class StoryLine:
             time.sleep(2)
 
 class Player:
-    hero_list = np.array(['a', 'b', 'c'])
+    hero_list = np.array(['A', 'B', 'C'])
     hero = ''
-    items = {'Ring of health' : 20, 'Ring of Attack' : 40}
     master_of_riddles = False
     has_gem = False
 
     def set(self):
-        if self.hero == 'a':
+        if self.hero == 'A':
             self.name = 'Grimly The Fierce'
             self.hp = 100
-            self.attack = 20
+            self.attack = 30
             self.weapon = 'swings their mighty Axe'
 
-        elif self.hero == 'b':
+        elif self.hero == 'B':
             self.name = 'Ethondril the Agile'
             self.hp = 60
-            self.attack = 30
+            self.attack = 40
             self.weapon = 'fires their Long-Bow'
 
         else:
             self.name = 'Ailwyn the Powerful'
-            self.hp = 50
-            self.attack = 40
+            self.hp = 20
+            self.attack = 50
             self.weapon = 'launches a devestating Frostbolt'
 
     def hero_pick(self):
-        self.hero = get_input('\nWhich hero would you like to play as?\n a. Grimly The Fierce Warrior\n b. Ethondril the Agile Archer\n c. Ailwyn the Powerful Wizard\n')
+        self.hero = get_input('\nWhich hero would you like to play as? \n A. Grimly The Fierce Warrior\n B. Ethondril the Agile Archer\n C. Ailwyn the Powerful Wizard\n')
         while self.hero not in self.hero_list:
             self.hero = get_input('Please enter either a, b or c: ')          
 
@@ -101,7 +100,7 @@ class Player:
             counter += 1
             time.sleep(1)
             player_roll = randint(1,10)
-            print(f'{self.name} rolls a {player_roll}')
+            print(f'{self.name} rolls a {player_roll}\n')
             time.sleep(1)
             enemy_roll = randint(1,10)
             print(f'{enemy.name} rolls a {enemy_roll}\n')
@@ -163,6 +162,7 @@ class Player:
                 i = randint(0, len(riddles) - 1)
                 print(f'You have {wins} riddles solved!')
             else:
+                print(f'You\'ll have to be thinkin harder dan dat!')
                 attempts += 1
         if wins == 3:
             self.master_of_riddles = True
@@ -204,14 +204,14 @@ class RockPaperScissors:
                 print('\nIts a tie, Go again!')
                 continue
             if user_input == 'Rock' and comp_choice == 'Paper':
-                player_wins += 1
-                print('\nYou win this round!')
-            if user_input == 'Rock' and comp_choice == 'Scissors':
                 comp_wins += 1
                 print('\nAHA I win this one!')
-            if user_input == 'Scissors' and comp_choice == 'Paper':
+            if user_input == 'Rock' and comp_choice == 'Scissors':
                 player_wins += 1
                 print('\nYou are better than I thought!')
+            if user_input == 'Scissors' and comp_choice == 'Paper':
+                player_wins += 1
+                print('\nI knew I should have gone ROCK!')
             if user_input == 'Scissors' and comp_choice == 'Rock':
                 comp_wins += 1
                 print('\nI am so smart.. S M R T...')
@@ -220,13 +220,14 @@ class RockPaperScissors:
                 print('\nYou must be cheating!')
             if user_input == 'Paper' and comp_choice == 'Scissors':
                 comp_wins += 1
+                print('I\'m going Rock next time I promise')
             time.sleep(1)
             print(f'\nYour wins: {player_wins}\nOgre wins: {comp_wins}')
         if player_wins == 3:
             time.sleep(1)
-            print('\nI don\'t know how but you beat me!')
+            print(f'\nI don\'t know how but you beat me {player.name}!')
             player.has_gem = True
         else:
-            print('\nCome back when you\'ve had some practice, NO gem for you!')
+            print(f'\nCome back when you\'ve had some practice {player.name}, NO gem for you!')
 
         
