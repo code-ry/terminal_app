@@ -2,20 +2,6 @@ from random import randint
 import time
 import numpy as np
 
-# class Levels:
-#     def __init__(self, level1, level2):
-
-    
-#         self.levels = [level1, level2]
-#         self.level_selector = -1
-
-#     def add_level(self, level):
-#         self.levels.append(level)
-    
-#     def next_level(self):
-#         self.level_selector += 1
-#         return self.levels[self.level_selector]
-
 def get_input(prompt):
     input_value = input(prompt)
 
@@ -24,30 +10,13 @@ def get_input(prompt):
     
     return input_value
 
-# class StoryChoice:
-#     def __init__(self, question, live_answer, die_answer, death_message):
-#         self.question = question
-#         self.valid_answers = [live_answer, die_answer]
-#         self.next_level = None
-#         self.death_message = death_message
-        
-
-#     def play_level(self):
-#         user_input = ''
-#         while user_input not in self.valid_answers:
-#             user_input = get_input(f'{self.question}')
-
-#         if user_input == self.valid_answers[0]:
-#             return self.next_level.play_level()
-
-#         print({self.death_message})
-
 class StoryChoice:
-    def __init__(self, question, answer, alt = 'Y'):
+    def __init__(self, question, answer, fail, alt = 'Y'):
         self.question = question
         self.answer = answer
         self.progress = True
         self.alt = alt
+        self.fail = fail
 
     def choice(self):
         answer = get_input(f'{self.question}')
@@ -55,6 +24,18 @@ class StoryChoice:
             self.progress = True
         else:
             self.progress = False
+class StoryLine:
+    def __init__(self, line):
+        self.line = [line]
+
+    def add_line(self, line):
+        self.line.append(line)
+    
+    def concat_lines(self):
+        for i in self.line:
+            print(i)
+            time.sleep(2)
+
 
 class PlayAgain(StoryChoice):
     def choice(self):
@@ -101,13 +82,8 @@ class Player:
     def battle(self, enemy):
         get_input(f'You face off with the {enemy.name}.\n You must roll a higher number to attack. Press enter to roll!')
         counter = 0
+        enemy.hp = enemy.base_hp
         while self.hp > 0 and enemy.hp > 0:
-            # item_add = input('Would you like to use an item?')
-            # if item_add == 'Y':
-            #     which_item = input(f'Which item would you like to use?{self.items[')
-            #     self.attack += 20
-            # if item_add == 'Y':
-
             if counter > 0:
                 get_input('Press enter to Roll again!')
             counter += 1
@@ -127,10 +103,9 @@ class Player:
             else:
                 print('It\'s a Draw, roll again!')
             time.sleep(1)
-            #     self.attack -= 20
-            #     item_add == 'N'
         if self.hp > 0:
             print('You are the winner!')
+            
         else:
             print('You are the Loser!')
         
@@ -158,9 +133,11 @@ class Player:
                 print(f'Ok I will give you a clue... {clues[x]}')
 
 class Monster:
-    def __init__(self, name, hp, attack, weapon):
+    def __init__(self, name, base_hp, attack, weapon):
         self.name = name
-        self.hp = hp
+        self.base_hp = base_hp
         self.attack = attack
         self.weapon = weapon
+        self.hp = base_hp
 
+    
