@@ -2,7 +2,7 @@ import art
 import storyline as s
 from random import randint
 import time
-
+import numpy as np
 
 welcome = s.StoryChoice('Welcome to the Game, would you like to play?', 'Yes')
 play_again = s.StoryChoice('Would you like to play again?', 'Yes', 'Y')
@@ -18,34 +18,35 @@ def death(input):
 
 
 def main():
-    # storyline.levels[0]
-    art.tprint("GemQuest")
-    welcome.choice()
-    time.sleep(1)
-    if welcome.progress:
-        player.hero_pick()
-        time.sleep(1)
-        while play_again.progress:
-            player.set()
-            level_one.choice()
+    try:
+        while True:
+            art.tprint("GemQuest")
+            welcome.choice()
             time.sleep(1)
-            if level_one.progress:
-                player.battle(dragon)
+            if welcome.progress:
+                player.hero_pick()
                 time.sleep(1)
-                if player.hp > 0:
-                    level_two.choice()
+                while play_again.progress:
+                    player.set()
+                    level_one.choice()
                     time.sleep(1)
-                    if level_two.progress:
-                        player.puzzle()
+                    if level_one.progress:
+                        player.battle(dragon)
+                        time.sleep(1)
+                        if player.hp > 0:
+                            level_two.choice()
+                            time.sleep(1)
+                            if level_two.progress:
+                                player.puzzle()
+                            else:
+                                death('The Troll boils you in a pot!')
+                        else:
+                            death('The Dragon has beaten you in battle')
                     else:
-                        death('The Troll boils you in a pot!')
-                else:
-                    death('The Dragon has beaten you in battle')
-            else:
-                death('You try and run but the Dragon hunts you down')
-            play_again.choice()
-    print('Thank you for playing! GoodBye')
-
+                        death('You try and run but the Dragon hunts you down')
+                    play_again.choice()
+    except KeyboardInterrupt:
+        print("Thanks for playing! GoodBye") 
 
 if __name__ == '__main__':
     main()

@@ -1,18 +1,27 @@
 from random import randint
 import time
-class Levels:
-    def __init__(self, level1, level2):
+import numpy as np
+
+# class Levels:
+#     def __init__(self, level1, level2):
 
     
-        self.levels = [level1, level2]
-        self.level_selector = -1
+#         self.levels = [level1, level2]
+#         self.level_selector = -1
 
-    def add_level(self, level):
-        self.levels.append(level)
+#     def add_level(self, level):
+#         self.levels.append(level)
     
-    def next_level(self):
-        self.level_selector += 1
-        return self.levels[self.level_selector]
+#     def next_level(self):
+#         self.level_selector += 1
+#         return self.levels[self.level_selector]
+def get_input(prompt):
+    input_value = input(prompt)
+
+    if input_value == "quit":
+        raise KeyboardInterrupt
+    
+    return input_value
 
 class StoryChoice:
     def __init__(self, question, answer, alt = 'Y'):
@@ -22,15 +31,14 @@ class StoryChoice:
         self.alt = alt
 
     def choice(self):
-        print(f'{self.question}')
-        answer = input()
-        if answer == self.answer or answer == self.alt:
+        answer = get_input(f'{self.question}')
+        if answer in (self.answer, self.alt):
             self.progress = True
         else:
             self.progress = False
 
 class Player:
-    hero_list = ['a', 'b', 'c']
+    hero_list = np.array(['a', 'b', 'c'])
     hero = ''
     items = {'Ring of health' : 20, 'Ring of Attack' : 40}
 
@@ -57,7 +65,7 @@ class Player:
 
         while self.hero not in self.hero_list:
                 
-                self.hero = input('Which hero would you like to play as?\n a. Grimly The Fierce a Warrior\n b. Ethondril the Agile an Archer\n c. Ailwyn the Powerful a Wizard\n')
+                self.hero = get_input('Which hero would you like to play as?\n a. Grimly The Fierce a Warrior\n b. Ethondril the Agile an Archer\n c. Ailwyn the Powerful a Wizard\n')
 
     def __repr__(self):
         return f'{self.hero}, {self.hp}, {self.attack}, {self.weapon}'
@@ -99,16 +107,16 @@ class Player:
             print('You are the Loser!')
         
     def puzzle(self):
-        riddles = [
+        riddles = np.array([
             'What has to be broken before you can use it?',
             'I\'m tall when young yet short when I\'m old, What am I?',
             'I\'m full of holes but still hold water?'
-            ]
-        clues = [
+            ])
+        clues = np.array([
             'Who first, me or the Chicken!',
             'I show you the way in the dark!',
             'My best friend is Patrick!'
-        ]
+        ])
         answers = ['Egg', 'Candle', 'Sponge']
         attempts = 5
         x = randint(0, 2)
