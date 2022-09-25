@@ -61,7 +61,6 @@ def main():
             if welcome.progress is False:
                 raise KeyboardInterrupt
             player.hero_pick(brimly, mokimo, ailwyn)
-            player.set()
             time.sleep(1)
             first_story.concat_lines()
             level_one.choice()
