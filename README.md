@@ -47,6 +47,37 @@ Along the journey the User will come across a mysterious character. To get past 
 
 https://trello.com/invite/b/MsbMDOnQ/525ad056e87b76e646bbd8678684e49c/terminal-game
 
+## Testing
+
+test_player_class.py tests the funtioniality of when the user chooses which hero to play as.
+Is an important function as it affects multiple attributes of the player being health, and attack which will in turn affect the battle event. player names are also referenced throughout the game and so this function must work correctly.
+
+The tests assure the user input corresponds to the correct hero that the choice is assigned to. Three diffrent values are tested to ensure correct behaviour.
+
+### test_player_class results
+============================= test session starts ==============================
+platform linux -- Python 3.10.4, pytest-7.1.3, pluggy-1.0.0
+rootdir: /mnt/c/projects/assignments/term1/T1A3/src
+collected 3 items
+
+test_player_class.py ...                                                 [100%]
+
+============================== 3 passed in 0.96s ===============================
+
+test_story_choice.py tests the behaviour of a user input when used in the narrative line in the game. The user is promted to choose a path and the resulting choice will effect the result. This is a very important feature as it is the main way of tracking progression through the game, whether the user lives or dies.
+
+The tests performed ensure when a user inputs a value it is assigned correctly to the given path and the resulting behavior is expected. The three tests assert that the input values are correctly assigned, and the returned value is expected.
+
+### test_story_choice results
+============================= test session starts ==============================
+platform linux -- Python 3.10.4, pytest-7.1.3, pluggy-1.0.0
+rootdir: /mnt/c/projects/assignments/term1/T1A3/src
+collected 3 items
+
+test_story_choice.py ...                                                 [100%]
+
+============================== 3 passed in 0.86s ===============================
+
 ## Help Documentation
 
 ### Installation
