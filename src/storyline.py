@@ -2,6 +2,9 @@ import time
 from random import randint
 import numpy as np
 
+# Checks input and makes first letter capital for consistency of input
+# Raises KeyoardInterrupt if 'Quit' is entered to exit program
+
 def get_input(prompt):
     input_value = input(prompt).capitalize()
 
@@ -10,18 +13,18 @@ def get_input(prompt):
     
     return input_value
 
+# Creates IncorrectValue exception to use in exception function
+
+class IncorrectValue(Exception):
+    pass
+
+# Checks if input value is not desired input value
+
 def raise_exception(input_value, val_one = None, val_two = None, val_three = None):
     if input_value not in (val_one, val_two, val_three):
         raise IncorrectValue
 
-def random_death(val_one, val_two, val_three):
-    messages = [val_one, val_two, val_three]
-    i = randint(0, len(messages) - 1)
-    print(messages[i])
-    messages.pop(i)
-
-class IncorrectValue(Exception):
-    pass
+# Basic storyline creation and concatenation
 
 class StoryLine:
     def __init__(self, line):
@@ -35,6 +38,8 @@ class StoryLine:
             print(i)
             time.sleep(2)
 
+# Storyline creation which can randomly generate one line.
+
 class DeathMessage():
     def __init__(self, message):
         self.messages = [message]
@@ -43,14 +48,20 @@ class DeathMessage():
     def add_line(self, message):
         self.messages.append(message)
         self.base_messages.append(message)
- 
+    
+    # Selects random message from list and removes after displaying to terminal
+
     def random_death(self):
         i = randint(0, len(self.messages) - 1)
         print(self.messages[i])
         self.messages.pop(i)
 
+        #When list is exhausted, replenishes with original list.
+
         if len(self.messages) - 1 == 0:
             self.messages = self.base_messages
+
+# Storyline creation which provides an input option and saves as variable to control flow
 
 class StoryChoice:
     def __init__(self, question, path_one, path_two):
@@ -62,10 +73,13 @@ class StoryChoice:
 
     def choice(self):
         user_input = get_input(f'{self.question}')
+        
         try:
+            
             raise_exception(user_input, self.path_one, self.path_two)
+
         except IncorrectValue:
-            print('\nThis is not a valid value.\n')
+            print(f'\n{user_input} is not a valid value.\n')
 
         while user_input not in (self.path_one, self.path_two):
             print(f'Please enter either {self.path_one} or {self.path_two}\n')
@@ -76,6 +90,7 @@ class StoryChoice:
         else:
             self.progress = False
 
+# Storyline option that terminates program if one path is chosen (to exit)
 class PlayAgain(StoryChoice):
     def __init__(self, question, path_one, path_two):
         super().__init__(question, path_one, path_two)
@@ -90,11 +105,11 @@ class PlayAgain(StoryChoice):
             print(f'Please enter either {self.path_one} or {self.path_two} or \'quit\'.')
             user_input = get_input(f'{self.question}')
 
-        if user_input == self.path_one:
-            self.progress = True
-
-        else:
+        if user_input == self.path_two:
             raise KeyboardInterrupt
+     
+
+# Simple character creation
 
 class Character:
     def __init__(self, name, base_hp, attack, weapon):
@@ -104,6 +119,8 @@ class Character:
         self.weapon = weapon
         self.hp = base_hp
 
+# Player specific character creation
+
 class Player(Character):
     def __init__(self, name=None, base_hp=None, attack=None, weapon=None):
         super().__init__(name, base_hp, attack, weapon)
@@ -112,51 +129,54 @@ class Player(Character):
         self.attack = attack
         self.weapon = weapon
         self.hp = base_hp
+        self.badges = []
 
-    hero = None
-    hero_list = np.array(['A', 'B', 'C'])
-    slayer_of_dragon = False
-    master_of_riddles = False
-    has_gem = False
+    # player Hero selection
 
-    def hero_pick(self):
-        user_input = get_input('\nWhich hero would you like to play as? \n A. Grimly The Fierce Warrior\n B. Ethondril the Agile Archer\n C. Ailwyn the Powerful Wizard\n')
-        try:
-            raise_exception(user_input, 'A', 'B', 'C')
+    def hero_pick(self, hero_one, hero_two, hero_three):
+        user_input = get_input(f'''\nWhich hero would you like to play as?\n 
+        A. {hero_one.name} | Health: {hero_one.base_hp} | Attack: {hero_one.attack} | Weapon: {hero_one.weapon}\n
+        B. {hero_two.name} | Health: {hero_two.base_hp} | Attack: {hero_two.attack} | Weapon: {hero_two.weapon}\n
+        C. {hero_three.name} | Health: {hero_three.base_hp} | Attack: {hero_three.attack} | Weapon: {hero_three.weapon}\n''')
 
-        except IncorrectValue:
-            print('This is not a valid value.\n')
+        while user_input not in ('A', 'B', 'C'):
+            try:
+                raise_exception(user_input, 'A', 'B', 'C')
 
-        while user_input not in self.hero_list:
+            except IncorrectValue:
+                print(f'{user_input} is not a valid value.\n')
+                
             user_input = get_input('Please enter either A, B or C: \n')
         
-        self.hero = user_input
+        if user_input == 'A':
+            self.name = hero_one.name
+            self.base_hp = hero_one.base_hp
+            self.attack = hero_one.attack
+            self.weapon = hero_one.weapon
+            self.hp = hero_one.hp
+            self.badges = []
+        
+        elif user_input == 'B':
+            self.name = hero_two.name
+            self.base_hp = hero_two.base_hp
+            self.attack = hero_two.attack
+            self.weapon = hero_two.weapon
+            self.hp = hero_two.hp
+            self.badges = []
+
+        if user_input == 'C':
+            self.name = hero_three.name
+            self.base_hp = hero_three.base_hp
+            self.attack = hero_three.attack
+            self.weapon = hero_three.weapon
+            self.hp = hero_three.hp
+            self.badges = []
+            
+
+    # Player setter to set/reset attribute values upon looping
 
     def set(self):
-        self.slayer_of_dragon = False
-        self.master_of_riddles = False
-        self.has_gem = False
-
-        if self.hero == 'A':
-            self.name = 'Grimly The Fierce'
-            self.hp = 100
-            self.attack = 30
-            self.weapon = 'swings their mighty Axe'
-
-        elif self.hero == 'B':
-            self.name = 'Ethondril the Agile'
-            self.hp = 60
-            self.attack = 40
-            self.weapon = 'fires their Long-Bow'
-
-        else:
-            self.name = 'Ailwyn the Powerful'
-            self.hp = 20
-            self.attack = 50
-            self.weapon = 'launches a devestating Frostbolt'
+        self.badges = []
 
     def __repr__(self):
-        return f'{self.hero}, {self.hp}, {self.attack}, {self.weapon}'
-
-
-  
+        return f'{self.name}, {self.hp}, {self.attack}, {self.weapon}'
