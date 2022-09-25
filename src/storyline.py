@@ -171,11 +171,5 @@ class Player(Character):
             self.hp = hero_three.hp
             self.badges = []
             
-
-    # Player setter to set/reset attribute values upon looping
-
-    def set(self):
-        self.badges = []
-
     def __repr__(self):
         return f'{self.name}, {self.hp}, {self.attack}, {self.weapon}'
