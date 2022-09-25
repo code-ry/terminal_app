@@ -75,7 +75,6 @@ class StoryChoice:
         user_input = get_input(f'{self.question}')
         
         try:
-            
             raise_exception(user_input, self.path_one, self.path_two)
 
         except IncorrectValue:
