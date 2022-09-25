@@ -20,7 +20,7 @@ class IncorrectValue(Exception):
 
 # Checks if input value is not desired input value
 
-def raise_exception(input_value, val_one = None, val_two = None, val_three = None):
+def raise_exception(input_value=None, val_one = None, val_two = None, val_three = None):
     if input_value not in (val_one, val_two, val_three):
         raise IncorrectValue
 
